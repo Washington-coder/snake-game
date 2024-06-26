@@ -58,40 +58,53 @@
     walk() {
       const head = this.body[this.body.length - 1];
       let newHead;
+
+      function moveDown() {
+        return [head[0] + 1, head[1]]
+      }
+      function moveUp() {
+        return [head[0] - 1, head[1]]
+      }
+      function moveLeft() {
+        return [head[0], head[1] - 1]
+      }
+      function moveRight() {
+        return [head[0], head[1] + 1]
+      }
+
       switch (this.newDirection) {
         case "up":
-          if (this.currentDirection === "down") { // blocks snake going to the oposite direction when moving down
-            newHead = [head[0] + 1, head[1]]
+          if (this.currentDirection === "down") { // blocks up direction when moving down
+            newHead = moveDown()
             break;
           }
-          newHead = [head[0] - 1, head[1]]
+          newHead = moveUp()
           this.currentDirection = this.newDirection;
           break;
         case "right":
-          if (this.currentDirection === "left") { // blocks snake going to the oposite direction when moving left
-            newHead = [head[0], head[1] - 1]
+          if (this.currentDirection === "left") { // blocks right direction when moving left
+            newHead = moveLeft()
             break;
           }
-          newHead = [head[0], head[1] + 1]
+          newHead = moveRight()
           this.currentDirection = this.newDirection;
           break;
         case "down":
-          if (this.currentDirection === "up") { // blocks snake going to the oposite direction when moving up
-            newHead = [head[0] - 1, head[1]]
+          if (this.currentDirection === "up") { // blocks down direction when moving up
+            newHead = moveUp()
             break;
           }
-          newHead = [head[0] + 1, head[1]]
+          newHead = moveDown()
           this.currentDirection = this.newDirection;
           break;
         case "left":
-          if (this.currentDirection === "right") { // blocks snake going to the oposite direction when moving right 
-            newHead = [head[0], head[1] + 1]
-            break;
-          }else{
-            newHead = [head[0], head[1] - 1]
-            this.currentDirection = this.newDirection;
+          if (this.currentDirection === "right") { // blocks left direction when moving right
+            newHead = moveRight()
             break;
           }
+          newHead = moveLeft()
+          this.currentDirection = this.newDirection;
+          break;
         default:
           break;
       }
