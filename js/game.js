@@ -57,7 +57,7 @@
         rowIndex = Math.floor(Math.random()*40);
         columnIndex = Math.floor(Math.random()*40);
       }
-      
+
       let randomRow = this.element.children[rowIndex]
       let randomCellInTheRow = randomRow.cells[columnIndex]
 
@@ -140,7 +140,7 @@
       checkIfPlayerLost(newHead);
 
       if (document.querySelector(`#board tr:nth-child(${newHead[0]}) td:nth-child(${newHead[1]})`).style.backgroundColor === FOOD_COLOR){
-        snake.eat();
+        snake.eat(newHead);
       }
 
       document.querySelector(`#board tr:nth-child(${newHead[0]}) td:nth-child(${newHead[1]})`).style.backgroundColor = this.color
@@ -149,7 +149,8 @@
     changeDirection(direction) {
       this.newDirection = direction
     }
-    eat(){
+    eat(newHead){
+      this.body.push(newHead)
       board.generateFood();
     }
   }
