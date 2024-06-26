@@ -2,6 +2,7 @@
   let FPS = 10
   const SIZE = 40
   const SNAKE_COLOR = 'rgb(34, 34, 34)'
+  const FOOD_COLOR = 'red'
 
   let board;
   let snake;
@@ -9,6 +10,7 @@
   function init() {
     board = new Board(SIZE);
     snake = new Snake([[4, 4], [4, 5], [4, 6], [4, 7], [4, 8], [4, 9]])
+    board.generateFood();
     setInterval(run, 1000 / FPS)
   }
 
@@ -46,6 +48,21 @@
         }
       }
     }
+    generateFood(){
+      let occupiedPositionsBySnake = snake.body;
+      let rowIndex = Math.floor(Math.random()*40);
+      let columnIndex = Math.floor(Math.random()*40);
+      
+      while (occupiedPositionsBySnake.find((position) => position == [rowIndex, columnIndex]) === true) {
+        rowIndex = Math.floor(Math.random()*40);
+        columnIndex = Math.floor(Math.random()*40);
+      }
+      
+      let randomRow = this.element.children[rowIndex]
+      let randomCellInTheRow = randomRow.cells[columnIndex]
+
+      randomCellInTheRow.style.backgroundColor = FOOD_COLOR;
+    }
   }
 
   class Snake {
@@ -64,7 +81,7 @@
         const headElement = document.querySelector(`#board tr:nth-child(${newHead[0]}) td:nth-child(${newHead[1]})`)
         const isSnakeEatingItself = headElement === null ? false : headElement.style.backgroundColor === SNAKE_COLOR;
         if (headElement === null || isSnakeEatingItself) {
-          window.alert("You lost the game!")
+          // window.alert("You lost the game!")
         }
       }
 
@@ -122,11 +139,18 @@
 
       checkIfPlayerLost(newHead);
 
+      if (document.querySelector(`#board tr:nth-child(${newHead[0]}) td:nth-child(${newHead[1]})`).style.backgroundColor === FOOD_COLOR){
+        snake.eat();
+      }
+
       document.querySelector(`#board tr:nth-child(${newHead[0]}) td:nth-child(${newHead[1]})`).style.backgroundColor = this.color
       document.querySelector(`#board tr:nth-child(${oldTail[0]}) td:nth-child(${oldTail[1]})`).style.backgroundColor = board.color
     }
     changeDirection(direction) {
       this.newDirection = direction
+    }
+    eat(){
+      board.generateFood();
     }
   }
   function run() {
