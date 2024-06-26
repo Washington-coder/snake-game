@@ -9,7 +9,7 @@
 
   function init() {
     board = new Board(SIZE);
-    snake = new Snake([[4, 4], [4, 5], [4, 6], [4, 7], [4, 8], [4, 9]])
+    snake = new Snake([[4, 4], [4, 5], [4, 6], [4, 7], [4, 8], [4, 9], [4, 10], [4, 11], [4, 12], [4, 13]])
     board.generateFood();
     setInterval(run, 1000 / FPS)
   }
@@ -48,18 +48,21 @@
         }
       }
     }
-    generateFood(){
-      let occupiedPositionsBySnake = snake.body;
-      let rowIndex = Math.floor(Math.random()*40);
-      let columnIndex = Math.floor(Math.random()*40);
-      
-      while (occupiedPositionsBySnake.find((position) => position == [rowIndex, columnIndex]) === true) {
-        rowIndex = Math.floor(Math.random()*40);
-        columnIndex = Math.floor(Math.random()*40);
-      }
+    generateFood() {
+
+      let rowIndex = Math.floor(Math.random() * SIZE);
+      let columnIndex = Math.floor(Math.random() * SIZE);
 
       let randomRow = this.element.children[rowIndex]
-      let randomCellInTheRow = randomRow.cells[columnIndex]
+      console.log(randomRow)
+      let randomCellInTheRow = randomRow.children[columnIndex]
+
+      while (randomCellInTheRow.style.backgroundColor === SNAKE_COLOR) {
+        rowIndex = Math.floor(Math.random() * 40);
+        columnIndex = Math.floor(Math.random() * 40);
+        randomRow = this.element.children[rowIndex]
+        randomCellInTheRow = randomRow.children[columnIndex]
+      }
 
       randomCellInTheRow.style.backgroundColor = FOOD_COLOR;
     }
@@ -139,7 +142,7 @@
 
       checkIfPlayerLost(newHead);
 
-      if (document.querySelector(`#board tr:nth-child(${newHead[0]}) td:nth-child(${newHead[1]})`).style.backgroundColor === FOOD_COLOR){
+      if (document.querySelector(`#board tr:nth-child(${newHead[0]}) td:nth-child(${newHead[1]})`).style.backgroundColor === FOOD_COLOR) {
         snake.eat(newHead);
       }
 
@@ -149,7 +152,7 @@
     changeDirection(direction) {
       this.newDirection = direction
     }
-    eat(newHead){
+    eat(newHead) {
       this.body.push(newHead)
       board.generateFood();
     }
