@@ -1,13 +1,14 @@
 (function () {
   let FPS = 10
   const SIZE = 40
+  const SNAKE_COLOR = 'rgb(34, 34, 34)'
 
   let board;
   let snake;
 
   function init() {
     board = new Board(SIZE);
-    snake = new Snake([[4, 4], [4, 5], [4, 6]])
+    snake = new Snake([[4, 4], [4, 5], [4, 6], [4, 7], [4, 8], [4, 9]])
     setInterval(run, 1000 / FPS)
   }
 
@@ -50,7 +51,7 @@
   class Snake {
     constructor(body) {
       this.body = body;
-      this.color = "#222";
+      this.color = SNAKE_COLOR;
       this.newDirection = "right";
       this.currentDirection = "right";
       this.body.forEach(field => document.querySelector(`#board tr:nth-child(${field[0]}) td:nth-child(${field[1]})`).style.backgroundColor = this.color)
@@ -58,6 +59,14 @@
     walk() {
       const head = this.body[this.body.length - 1];
       let newHead;
+
+      function checkIfPlayerLost(newHead) {
+        const headElement = document.querySelector(`#board tr:nth-child(${newHead[0]}) td:nth-child(${newHead[1]})`)
+        const isSnakeEatingItself = headElement === null ? false : headElement.style.backgroundColor === SNAKE_COLOR;
+        if (headElement === null || isSnakeEatingItself) {
+          window.alert("You lost the game!")
+        }
+      }
 
       function moveDown() {
         return [head[0] + 1, head[1]]
@@ -110,6 +119,9 @@
       }
       this.body.push(newHead)
       const oldTail = this.body.shift()
+
+      checkIfPlayerLost(newHead);
+
       document.querySelector(`#board tr:nth-child(${newHead[0]}) td:nth-child(${newHead[1]})`).style.backgroundColor = this.color
       document.querySelector(`#board tr:nth-child(${oldTail[0]}) td:nth-child(${oldTail[1]})`).style.backgroundColor = board.color
     }
@@ -117,7 +129,6 @@
       this.newDirection = direction
     }
   }
-
   function run() {
     snake.walk()
   }
