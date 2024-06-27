@@ -1,9 +1,10 @@
 (function () {
   let FPS = 10
   const SIZE = 40
-  const SNAKE_COLOR = 'rgb(34, 34, 34)'
+  const SNAKE_COLOR = 'green'
   const FOOD_COLOR = 'red'
   let isWining = true
+  let isGamePaused = false
   let score = 0
 
   let board;
@@ -15,6 +16,27 @@
     board.generateFood();
     setInterval(run, 1000 / FPS)
   }
+
+  function handlePauseAction() {
+    if (isGamePaused){
+      // close modal
+      document.getElementById('pause-modal').style.display = 'none';
+      isGamePaused = false;
+    }else{
+      // open modal
+      document.getElementById('pause-modal').style.display = 'flex';
+      isGamePaused = true;
+    }
+  }
+
+  document.getElementById('menu-icon').addEventListener('click', (e) => {
+    console.log("entrou")
+    handlePauseAction();
+  })
+
+  document.getElementById('pause-modal-button-continue').addEventListener('click', (e) => {
+    handlePauseAction();
+  })
 
   window.addEventListener("keydown", (e) => {
     switch (e.key) {
@@ -29,6 +51,9 @@
         break;
       case "ArrowLeft":
         snake.changeDirection("left")
+        break;
+      case "Escape":
+        handlePauseAction();
         break;
       default:
         break;
@@ -162,13 +187,9 @@
     }
   }
   function run() {
-    if (isWining) {
+    if (isWining && !isGamePaused) {
       snake.walk()
-    }else{
-      // clearInterval(run)
-      // window.alert("You lost the game!")
     }
-
   }
   init()
 })()

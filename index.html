@@ -10,8 +10,24 @@
 
 <body>
   <div id="container">
+    <div id="pause-modal">
+      <div class="pause-modal-section">
+        <h3>Game paused</h3>
+      </div>
+      <div class="pause-modal-content">
+        <p>Dificulty: </p>
+        <a target="_blank" href="https://github.com/Washington-coder">About the author</a>
+        <button>Restart match</button>
+      </div>
+      <div class="pause-modal-section">
+        <button id="pause-modal-button-continue">Continue</button>
+      </div>
+    </div>
+    <div class="menu-container-top">
+      <img id="menu-icon" src="./public/menu-icon.svg" />
+    </div>
     <script src="js/game.js"></script>
-    <div class="menu-container">
+    <div class="menu-container-bottom">
       <div class="score-container">
         <p>Score: </p>
         <p id="score">0</p>
