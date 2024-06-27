@@ -3,6 +3,8 @@
   const SIZE = 40
   const SNAKE_COLOR = 'rgb(34, 34, 34)'
   const FOOD_COLOR = 'red'
+  let isWining = true
+  let score = 0
 
   let board;
   let snake;
@@ -38,7 +40,7 @@
       this.element = document.createElement("table")
       this.element.setAttribute("id", "board")
       this.color = "#ccc";
-      document.body.appendChild(this.element)
+      document.getElementById('container').appendChild(this.element)
       for (let i = 0; i < size; i++) {
         const row = document.createElement("tr")
         this.element.appendChild(row);
@@ -54,7 +56,6 @@
       let columnIndex = Math.floor(Math.random() * SIZE);
 
       let randomRow = this.element.children[rowIndex]
-      console.log(randomRow)
       let randomCellInTheRow = randomRow.children[columnIndex]
 
       while (randomCellInTheRow.style.backgroundColor === SNAKE_COLOR) {
@@ -84,7 +85,8 @@
         const headElement = document.querySelector(`#board tr:nth-child(${newHead[0]}) td:nth-child(${newHead[1]})`)
         const isSnakeEatingItself = headElement === null ? false : headElement.style.backgroundColor === SNAKE_COLOR;
         if (headElement === null || isSnakeEatingItself) {
-          // window.alert("You lost the game!")
+          isWining = false;
+          clearInterval(run)
         }
       }
 
@@ -153,12 +155,19 @@
       this.newDirection = direction
     }
     eat(newHead) {
+      score += 1;
       this.body.push(newHead)
       board.generateFood();
     }
   }
   function run() {
-    snake.walk()
+    if (isWining) {
+      snake.walk()
+    }else{
+      // clearInterval(run)
+      // window.alert("You lost the game!")
+    }
+
   }
   init()
 })()
