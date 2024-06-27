@@ -28,13 +28,18 @@
   display: flex;
   padding: 10px;
   gap: 5px;
+
   border: 2px solid green;
   border-radius: 16px;
+
+  color: white;
+  background-color: green;
 }
 
 .menu-container {
   display: flex;
   width: 406px;
+  justify-content: center;
 }
 
 body {

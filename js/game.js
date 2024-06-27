@@ -156,6 +156,7 @@
     }
     eat(newHead) {
       score += 1;
+      document.getElementById('score').innerHTML = score;
       this.body.push(newHead)
       board.generateFood();
     }
