@@ -8,6 +8,12 @@
   <title>Game Snake</title>
 </head>
 
+<script>
+  function reloadGame() {
+    window.location.reload();
+  }
+</script>
+
 <body>
   <div id="container">
     <div id="pause-modal">
@@ -17,7 +23,7 @@
       <div class="pause-modal-content">
         <p>Dificulty: </p>
         <a target="_blank" href="https://github.com/Washington-coder">About the author</a>
-        <button id="pause-modal-button-restart">Restart match</button>
+        <button class="reload-button" onclick="reloadGame()">Restart match</button>
       </div>
       <div class="pause-modal-section">
         <button id="pause-modal-button-continue">Continue</button>
@@ -32,6 +38,11 @@
         <p>Score: </p>
         <p id="score">0</p>
       </div>
+    </div>
+    <div id="game-over-modal">
+      <h1>Game over !</h1>
+      <p>Thanks for playing (:</p>
+      <button class="reload-button" onclick="reloadGame()">Play again</button>
     </div>
   </div>
 </body>

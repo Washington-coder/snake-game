@@ -32,16 +32,11 @@
   }
 
   document.getElementById('menu-icon').addEventListener('click', (e) => {
-    console.log("entrou")
     handlePauseAction();
   })
 
   document.getElementById('pause-modal-button-continue').addEventListener('click', (e) => {
     handlePauseAction();
-  })
-
-  document.getElementById('pause-modal-button-restart').addEventListener('click', () => {
-    location.reload();
   })
 
   window.addEventListener("keydown", (e) => {
@@ -120,6 +115,7 @@
         const isSnakeEatingItself = headElement === null ? false : headElement.style.backgroundColor === SNAKE_COLOR;
         if (headElement === null || isSnakeEatingItself) {
           isWining = false;
+          document.getElementById('game-over-modal').style.display = 'flex';
           clearInterval(run)
         }
       }
