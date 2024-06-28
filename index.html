@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/style.css" />
   <title>Game Snake</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 
 <script>
@@ -21,8 +24,8 @@
         <h3>Game paused</h3>
       </div>
       <div class="pause-modal-content">
-        <p>Dificulty: </p>
-        <a target="_blank" href="https://github.com/Washington-coder">About the author</a>
+        <p>Dificulty: XXXXXX</p>
+        <a style="color: white;" target="_blank" href="https://github.com/Washington-coder">About the author</a>
         <button class="reload-button" onclick="reloadGame()">Restart match</button>
       </div>
       <div class="pause-modal-section">
@@ -30,7 +33,9 @@
       </div>
     </div>
     <div class="menu-container-top">
-      <img id="menu-icon" src="./public/menu-icon.svg" />
+      <img class="menu-icon" id="menu-icon" src="./public/menu-icon.svg" />
+      <h3>Snake Game</h3>
+      <img class="menu-icon" id="info-icon" src="./public/info-icon.svg" />
     </div>
     <script src="js/game.js"></script>
     <div class="menu-container-bottom">
@@ -42,7 +47,7 @@
     <div id="game-over-modal">
       <h1>Game over !</h1>
       <p>Thanks for playing (:</p>
-      <button class="reload-button" onclick="reloadGame()">Play again</button>
+      <button style="background-color: rgb(98, 56, 248); color: white;" class="reload-button" onclick="reloadGame()">Play again</button>
     </div>
   </div>
 </body>

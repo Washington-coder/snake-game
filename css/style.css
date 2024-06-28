@@ -1,11 +1,12 @@
 * {
   padding: 0px;
   margin: 0px;
+  font-family: 'Roboto', sans-serif;
 }
 
 #board {
   background-color: #ccc;
-  border: 2px solid black;
+  border: none;
   border-radius: 5px;
 }
 
@@ -22,11 +23,6 @@
   width: 100%;
   height: 100vh;
   gap: 20px;
-}
-
-#menu-icon {
-  width: 20px;
-  cursor: pointer;
 }
 
 #pause-modal {
@@ -60,13 +56,23 @@
   color: white;
 }
 
+#pause-modal-button-continue {
+  cursor: pointer;
+
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+
+  color: white;
+  background-color: rgb(98, 56, 248);
+}
+
 .score-container {
   display: flex;
   padding: 10px;
   gap: 5px;
 
   border: 2px solid green;
-  border-radius: 16px;
 
   color: white;
   background-color: green;
@@ -81,7 +87,12 @@
 .menu-container-top {
   display: flex; 
   width: 406px; 
-  justify-content: start;
+  justify-content: space-between;
+}
+
+.menu-icon {
+  width: 20px;
+  cursor: pointer;
 }
 
 .pause-modal-section {
@@ -93,7 +104,8 @@
 .pause-modal-content {
   display: flex;
   width: 100%; 
-  flex-direction: column;
+
+  justify-content: center;
   align-items: center;
   gap: 20px;
 }
@@ -105,8 +117,8 @@
   border-radius: 20px;
   padding: 10px;
 
-  color: black;
-  background-color: rgb(69, 250, 94);
+  color: white;
+  background-color: rgb(98, 56, 248);
 }
 
 body {
