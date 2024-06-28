@@ -3,6 +3,8 @@
   const SIZE = 40
   const SNAKE_COLOR = 'green'
   const FOOD_COLOR = 'red'
+  const BOARD_COLOR = '#ccc'
+  const INITIAL_SNAKE_POSITION = [[4, 4], [4, 5], [4, 6], [4, 7], [4, 8], [4, 9], [4, 10], [4, 11], [4, 12], [4, 13]]
   let isWining = true
   let isGamePaused = false
   let score = 0
@@ -12,17 +14,17 @@
 
   function init() {
     board = new Board(SIZE);
-    snake = new Snake([[4, 4], [4, 5], [4, 6], [4, 7], [4, 8], [4, 9], [4, 10], [4, 11], [4, 12], [4, 13]])
+    snake = new Snake(INITIAL_SNAKE_POSITION)
     board.generateFood();
     setInterval(run, 1000 / FPS)
   }
 
   function handlePauseAction() {
-    if (isGamePaused){
+    if (isGamePaused) {
       // close modal
       document.getElementById('pause-modal').style.display = 'none';
       isGamePaused = false;
-    }else{
+    } else {
       // open modal
       document.getElementById('pause-modal').style.display = 'flex';
       isGamePaused = true;
@@ -36,6 +38,10 @@
 
   document.getElementById('pause-modal-button-continue').addEventListener('click', (e) => {
     handlePauseAction();
+  })
+
+  document.getElementById('pause-modal-button-restart').addEventListener('click', () => {
+    location.reload();
   })
 
   window.addEventListener("keydown", (e) => {
@@ -55,6 +61,9 @@
       case "Escape":
         handlePauseAction();
         break;
+      case "r":
+        location.reload();
+        break;
       default:
         break;
     }
@@ -64,7 +73,7 @@
     constructor(size) {
       this.element = document.createElement("table")
       this.element.setAttribute("id", "board")
-      this.color = "#ccc";
+      this.color = BOARD_COLOR;
       document.getElementById('container').appendChild(this.element)
       for (let i = 0; i < size; i++) {
         const row = document.createElement("tr")
