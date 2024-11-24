@@ -6,4 +6,4 @@
 
 # Vídeo demonstrativo
 
-![Snake game](video/snake.mp4)
+![Snake game](video/snake.gif)
